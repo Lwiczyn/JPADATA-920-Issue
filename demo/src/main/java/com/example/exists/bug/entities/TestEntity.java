@@ -8,6 +8,10 @@ import javax.persistence.IdClass;
 
 import com.example.exists.bug.entities.TestEntity.TestEntityPK;
 
+/**
+ * An entity with a compound primary key implemented with @IdClass
+ */
+
 @Entity
 @IdClass(TestEntityPK.class)
 public class TestEntity {
@@ -17,10 +21,6 @@ public class TestEntity {
 
 	@Id
 	private String child;
-
-	private boolean isIdField = false; // Other non-id field to more accurately
-										// reproduce the class that was throwing
-										// this error for me
 
 	public String getParent() {
 		return parent;
@@ -38,20 +38,11 @@ public class TestEntity {
 		this.child = child;
 	}
 
-	public boolean isIdField() {
-		return isIdField;
-	}
-
-	public void setIdField(boolean isIdField) {
-		this.isIdField = isIdField;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((child == null) ? 0 : child.hashCode());
-		result = prime * result + (isIdField ? 1231 : 1237);
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
 	}
@@ -70,8 +61,6 @@ public class TestEntity {
 				return false;
 		} else if (!child.equals(other.child))
 			return false;
-		if (isIdField != other.isIdField)
-			return false;
 		if (parent == null) {
 			if (other.parent != null)
 				return false;
@@ -82,12 +71,12 @@ public class TestEntity {
 
 	@Override
 	public String toString() {
-		return "WithClassIdEntity [parent=" + parent + ", child=" + child + ", isIdField=" + isIdField + "]";
+		return "WithClassIdEntity [parent=" + parent + ", child=" + child + "]";
 	}
 
-	protected final static class TestEntityPK implements Serializable {
+	public final static class TestEntityPK implements Serializable {
 
-		private static final long serialVersionUID = 2220558299636114016L;
+		private static final long serialVersionUID = 1L;
 
 		private String parent;
 
