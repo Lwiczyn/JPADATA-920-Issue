@@ -33,6 +33,11 @@ public class TestEntityRepositoryTest {
 	 * have a value.
 	 * </p>
 	 * 
+	 * <p>
+	 * **NOTE** As the point of this test is to demonstrate the application
+	 * fails to load, no actual assertions were added.
+	 * </p>
+	 * 
 	 * @see <a href="https://jira.spring.io/browse/DATAJPA-920">DATAJPA-920</a>
 	 * 
 	 * @see <a href=
